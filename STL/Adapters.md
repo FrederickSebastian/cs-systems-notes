@@ -258,7 +258,7 @@ int main() {
 
 ## 以下是对std::bind() & std::regerence_wrapper的详细介绍
 
-### 一、`std::bind` 的本质（一句话）
+### 一、`std::bind` 的本质
 
 > **`std::bind` 不是“传参”，而是“生成一个带调用规则的函数对象”。**
 
