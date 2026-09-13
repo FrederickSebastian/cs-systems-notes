@@ -41,3 +41,53 @@ bool function<double*>(double* const& left,
 
 
 > 如果难以区分, 还可以按照const在`*`的左边或右边来区分const修饰的是谁.
+
+
+# shared_ptr的循环引用问题
+
+考察以下代码
+```C++
+#include <iostream>
+#include <memory>
+using namespace std;
+
+class B;
+
+class A {
+public:
+    shared_ptr<B> pb;
+
+    A()  { cout << "A()" << endl; }
+    ~A() { cout << "~A()" << endl; }
+};
+
+class B {
+public:
+    shared_ptr<A> pa;
+
+    B()  { cout << "B()" << endl; }
+    ~B() { cout << "~B()" << endl; }
+};
+
+int main() {
+    auto a = make_shared<A>();
+    auto b = make_shared<B>();
+
+    a->pb = b;
+    b->pa = a;
+
+    cout << "A use_count = " << a.use_count() << endl;
+    cout << "B use_count = " << b.use_count() << endl;
+
+    return 0;
+}
+```
+
+以上代码中, A对象嵌套了指向B的指针, B也嵌套了指向A的指针. 然后两个指针分别指向A与B. **多个对象通过shared_ptr相互引用, 形成强引用闭环, 析构时引用计数无法归零, 导致内存泄漏.**
+### 解决方案
+
+使用`weak_ptr`, 该指针为弱引用. 不增加`shared_ptr`的引用计数. 不延长对象的生命周期. 
+
+**使用weak_ptr时要考虑所有权语义.** 例如在双向链表中, `next`指针拥有下一个节点, 应当使用`shared_ptr`. `prev`指针本身只是指向上一个节点, 应当使用`weak_ptr`
+
+ >正向关系: `shared_ptr`. 反向关系: `weak_ptr`. 
