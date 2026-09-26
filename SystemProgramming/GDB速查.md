@@ -1,5 +1,9 @@
 # GDB 常用调试命令总结
 
+易错点: 
+1. 默认的情况下，make命令会在当前目录下按顺序找寻文件名为“GNUmakefile”、“makefile”、“Makefile”的文件， 找到了解释这个文件
+2. 在Makefile不可以使用include关键字把别的Makefile包含进来
+
 ### 1. 程序运行
 
 ```
