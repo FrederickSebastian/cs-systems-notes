@@ -5,15 +5,6 @@
 
 二者的优点与缺点
 
-# makefile
-
-**makefile** 为什么要用`phony`修饰, 为什么编译指令不用它修饰
-`phony` 总是被执行
-
-**makefile的栈结构推导**
-
-
-makefile中在命令前添加`@`符号让该指令不在terminal上回显
 
 
 ## 进程调度
