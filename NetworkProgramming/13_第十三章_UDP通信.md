@@ -95,7 +95,7 @@ addrlen：地址结构长度。
 
 ## 04P-UDP实现的并发服务器和客户端
 
-直接上代码，啃，啃就完事儿，这是服务器代码
+服务器代码
 ```c
 #include <string.h>
 #include <stdio.h>
@@ -155,7 +155,9 @@ int main(int argc, char *argv[])
     servaddr.sin_family = AF_INET;
     inet_pton(AF_INET, "127.0.0.1", &servaddr.sin_addr);
     servaddr.sin_port = htons(SERV_PORT);
-    bind(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
+    // bind(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
+    // 客户端不需要bind, 操作系统会在首次发送时自动为未绑定的 UDP socket 分配合适的本地 IP 和临时端口。
+    // 否则本地可能产生端口冲突
     while (fgets(buf, BUFSIZ, stdin) != NULL) {
         n = sendto(sockfd, buf, strlen(buf), 0, (struct sockaddr *)&servaddr, sizeof(servaddr));
         if (n == -1)
@@ -171,5 +173,3 @@ int main(int argc, char *argv[])
 ```
 
 ## 05P-借助TCP的CS模型，改写UDP的CS模型
-
-看懂前面的，问题就不大了。可以再看一下视频复习复习
