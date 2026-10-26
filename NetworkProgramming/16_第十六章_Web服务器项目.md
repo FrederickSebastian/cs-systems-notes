@@ -26,7 +26,7 @@
 
 # 第十六章：Web服务器项目
 
-## 01P-web大练习的概述
+## 01P-web大练习概述
 
 写一个供用户访问主机文件的web服务器
 
@@ -385,11 +385,6 @@ void send_error(int cfd, int status, char *title, char *text)
 }
 ```
 
-直接看完整代码吧：
-```c
-epoll_server.c
-```
-
 ## 15P-浏览器请求目录
 
 ```c
@@ -490,7 +485,7 @@ URL中的汉字默认是存为Unicode码
 
 ## 18P-libevent实现的web服务器
 
-直接源码啃起来吧
+略
 
 ## 19P-telnet调试
 
