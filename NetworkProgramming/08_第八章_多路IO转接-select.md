@@ -8,7 +8,6 @@
   - [04P-select相关函数参数分析](#04P-select相关函数参数分析)
   - [05P-select实现多路IO转接设计思路](#05P-select实现多路IO转接设计思路)
   - [06P-select实现多路IO转接-代码review](#06P-select实现多路IO转接-代码review)
-  - [07P-select实现多路IO转接-添加注释](#07P-select实现多路IO转接-添加注释)
   - [08P-select优缺点](#08P-select优缺点)
   - [09P-添加一个自定义数组提高效率](#09P-添加一个自定义数组提高效率)
   - [10P-总结](#10P-总结)
@@ -189,10 +188,6 @@ int main(int argc, char *argv[])
 ![图片](images/img_069.png)
 如图，借助select也可以实现多线程
 
-## 07P-select实现多路IO转接-添加注释
-
-代码太长了，直接看59话吧
-
 ## 08P-select优缺点
 
 ![图片](images/img_037.png)
@@ -207,7 +202,7 @@ select代码里有个可以优化的地方，用数组存下文件描述符，�
 这里就是改进之前代码的问题，之前的代码，如果最大fd是1023，每次确定有事件发生的fd时，就要扫描3-1023的所有文件描述符，这看起来很蠢。于是定义一个数组，把要监听的文件描述符存下来，每次扫描这个数组就行了。看起来科学得多。
 ![图片](images/img_037.png)
 如图，加个client数组，存要监听的描述符。
-代码如下，挺长的
+代码如下
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -292,8 +287,6 @@ int main(int argc, char *argv[])
     return 0;
 }
 ```
-
-编译运行和改进前没啥区别，这里就不贴图了
 
 ## 10P-总结
 
