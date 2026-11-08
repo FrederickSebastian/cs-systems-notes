@@ -38,7 +38,8 @@ int main(int argc, char *argv[])
 {
     int i, listenfd, connfd, sockfd;
     int  n, num = 0;
-    ssize_t nready, efd, res;
+    ssize_t nready, res;
+    int efd;
     char buf[MAXLINE], str[INET_ADDRSTRLEN];
     socklen_t clilen;
     struct sockaddr_in cliaddr, servaddr;
@@ -149,7 +150,7 @@ sudo vi /etc/security/limits.conf  修改上限
 如果使用ulimit -n  来修改，会受到之前设置的hard的限制：
 ![图片](images/img_039.png)
 ![图片](images/img_070.png)
-用ulimit -n设置之后，往下调可以，往上调需要注销用户再登录。
+用ulimit -n设置之后，上调该值需要注销用户再登录。
 
 ## 03P-epoll_create和epoll_ctl
 

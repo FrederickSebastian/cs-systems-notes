@@ -38,7 +38,6 @@ socket、bind、listen -- epoll_create 创建监听 红黑树 --  返回 epfd --
 
 ## 02P-epoll反应堆main逻辑
 
-直接上代码，这就略微有点长了：
 ```c
 /*
 *epoll基于非阻塞I/O事件驱动
